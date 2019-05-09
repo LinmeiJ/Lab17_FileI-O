@@ -7,7 +7,9 @@ public class CountriesApp {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		CountryTextFile ctf = new CountryTextFile();
-		new CountryTextFile().creatAFile();
+		String fileName = "src/countries.txt";
+
+		new CountryTextFile().creatAFile(fileName);
 		System.out.println("Welcome to the Countries Maintenance Application!");
 		String c = "y";
 		while(c.equalsIgnoreCase("y")){
@@ -23,7 +25,7 @@ public class CountriesApp {
 				ctf.writeToAFile();
 				break;
 			case 3:
-				//hasn't working yet... ;)
+//				ctf.deleteCountry();//it has broken line which I haven't figure it out
 				break;
 			case 4:
 				c = "n";

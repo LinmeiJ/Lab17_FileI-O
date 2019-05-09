@@ -4,6 +4,4 @@ China,138600000
 Rwanda,12210000
 afd,45154
 linmei,4512456
-linmei,7846
-linmei,7845
-fs,48786
+

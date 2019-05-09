@@ -1,10 +1,12 @@
 package co.grandcircus;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Path;
@@ -12,16 +14,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 
 
 public class CountryTextFile {
 	Scanner sc = new Scanner(System.in);
-	String fileName = "src/countries.txt";
 	Country c = new Country();
+	
 	ArrayList<Country> countryList = new ArrayList<>();
-
-	public void creatAFile() {
-		String cd = "src";
+	public void creatAFile(String fileName) {
 		Path filePath = Paths.get(fileName);
 
 		File f = filePath.toFile();
@@ -48,7 +50,7 @@ public class CountryTextFile {
 	}
 
 	public void readFromAFile() {
-
+		String fileName = "src/countries.txt";
 		Path filePath = Paths.get(fileName);
 		File f = filePath.toFile();
 		BufferedReader br = null;
@@ -76,6 +78,7 @@ public class CountryTextFile {
 	}
 
 	public void writeToAFile() {
+		String fileName = "src/countries.txt";
 		Path path = Paths.get(fileName);
 
 		File file = path.toFile();
@@ -97,6 +100,41 @@ public class CountryTextFile {
 
 			output.close();
 		}
+	}
+	
+	public void deleteCountry() {
+		String fileName = "src/countries.txt";
+		String tempFile = "src/temp.txt";
+		String deleteC = Validator.getString(sc, "Enter the country you wish to delete:");
+		File f = new File(fileName);
+		File t = new File(tempFile);
+		try {
+			//connect both files
+			FileWriter fw = new FileWriter(tempFile, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter pw = new PrintWriter(bw);
+			Scanner sc = new Scanner(new File(fileName));
+			sc.useDelimiter("[,\n]"); //seperate fileds by new line or a comma.
+			while(sc.hasNext()) {
+				c.setName(sc.next());
+				System.out.println(sc.next());
+				//broken line
+				c.setPopulation(Long.parseLong(sc.next()));//what doesn't pass this one?
+				
+				if(c.getName().equals(deleteC)) {
+					pw.println(c.getName() + "," + c.getPopulation());
+				}
+			}
+			sc.close();
+			pw.flush();
+			pw.close();
+			f.delete();//delete the original file
+			File oldFile = new File(fileName);
+			t.renameTo(oldFile);
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Something went wrong, cann't help!");
+		}
+		
 	}
 
 }
