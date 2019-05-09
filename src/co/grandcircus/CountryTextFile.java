@@ -102,6 +102,9 @@ public class CountryTextFile {
 		}
 	}
 	
+	
+	//trying to delete the old file by moving all countries(except the one that needs to be deleted) into a new file
+	//then rename the new file with the old file name.
 	public void deleteCountry() {
 		String fileName = "src/countries.txt";
 		String tempFile = "src/temp.txt";
@@ -118,8 +121,8 @@ public class CountryTextFile {
 			while(sc.hasNext()) {
 				c.setName(sc.next());
 				System.out.println(sc.next());
-				//broken line
-				c.setPopulation(Long.parseLong(sc.next()));//what doesn't pass this one?
+				//broken line!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+				c.setPopulation(Long.parseLong(sc.next()));//why doesn't pass this one?
 				
 				if(c.getName().equals(deleteC)) {
 					pw.println(c.getName() + "," + c.getPopulation());
